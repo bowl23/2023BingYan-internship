@@ -87,6 +87,7 @@ header {
     font-size: 30px;
 }
 
+#pvp.touch-start {}
 
 
 /* 返回按键 */
@@ -108,7 +109,12 @@ header {
     text-align: center;
 }
 
-.back:active {
-    transform: translate(-50%) scale(1.05);
-    transition: transform 0.1s ease-in-out;
+.back.touch-start {
+    transform: translate(-50%) scale(1.1);
+    transition: 0.1s ease-out;
+}
+
+.back.untouch {
+    transform: translate(-50%) scale(1);
+    transition: 0.1s ease-out;
 }

@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0 user-scalable=no initial-scale=1.0 ,maximum-scale=1.0,minimum-scale=1.0">
     <title>index</title>
     <link rel="stylesheet" href="../style/index.css">
     <link rel="stylesheet" href="../confont/index_cofont/iconfont.css">
@@ -18,12 +19,12 @@
         <div class="text">Score in the opposing goal! Use your finger to move your paddle and get 3 goals!</div>
         <!-- 两个按钮 -->
         <div class="btn-container">
-            <button>
+            <button id="pvp" class="">
                 <div class="iconfont icon-wo"></div>
                 <div class="btn-text"><span class="play-header">PLAY VS.</span><br><span class="choice">FRIEND</span>
                 </div>
             </button>
-            <button>
+            <button id="pve">
                 <div class="iconfont icon-jiqiren"></div>
                 <div class="btn-text"><span class="play-header">PLAY VS.</span><br><span class="choice">FRIEND</span>
                 </div>
@@ -31,7 +32,8 @@
         </div>
     </div>
     <!-- 返回按钮 -->
-    <button class="back"><strong>Back</strong></button>
+    <div class="back-container"><button id='back' class="back "><strong>Back</strong></button></div>
+
 </body>
 <script src="../script/index.js"></script>
 
