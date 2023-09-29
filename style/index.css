@@ -49,6 +49,7 @@ header {
 }
 
 .btn-container button {
+
     color: aliceblue;
     border: 1px;
     width: 100%;
@@ -63,7 +64,7 @@ header {
 
 .btn-container button.iconfont {
     width: 20%;
-    height: 80%;
+    height: 70%;
 }
 
 .btn-container button .btn-text {
@@ -87,8 +88,45 @@ header {
     font-size: 30px;
 }
 
-#pvp.touch-start {}
+#pvp.touch-start {
+    transform: scale(1.1);
+    transition: 0.1s ease-out;
+}
 
+#pvp.untouch {
+    transform: scale(1);
+    transition: 0.1s ease-out;
+}
+
+#pve.touch-start {
+    transform: scale(1.1);
+    transition: 0.1s ease-out;
+}
+
+#pve.untouch {
+    transform: scale(1);
+    transition: 0.1s ease-out;
+}
+
+#people.touch {
+    transform: rotate(-30deg);
+    transition: 0.1s ease-out;
+}
+
+#people.untouch {
+    transform: rotate(0);
+    transition: 0.1s ease-out;
+}
+
+#bot.touch {
+    transform: rotate(-30deg);
+    transition: 0.1s ease-out;
+}
+
+#bot.untouch {
+    transform: rotate(0);
+    transition: 0.1s ease-out;
+}
 
 /* 返回按键 */
 .back {
