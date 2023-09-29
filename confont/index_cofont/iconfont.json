@@ -1,0 +1,23 @@
+{
+  "id": "4271880",
+  "name": "冰岩前端实习",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1013076",
+      "name": "人",
+      "font_class": "wo",
+      "unicode": "e663",
+      "unicode_decimal": 58979
+    },
+    {
+      "icon_id": "16323142",
+      "name": "机器人",
+      "font_class": "jiqiren",
+      "unicode": "e70e",
+      "unicode_decimal": 59150
+    }
+  ]
+}
