@@ -1,8 +1,9 @@
 @font-face {
-  font-family: "iconfont"; /* Project id 4271880 */
+  font-family: "iconfont";
+  /* Project id 4271880 */
   src: url('iconfont.woff2?t=1695962844657') format('woff2'),
-       url('iconfont.woff?t=1695962844657') format('woff'),
-       url('iconfont.ttf?t=1695962844657') format('truetype');
+    url('iconfont.woff?t=1695962844657') format('woff'),
+    url('iconfont.ttf?t=1695962844657') format('truetype');
 }
 
 .iconfont {
@@ -15,9 +16,10 @@
 
 .icon-wo:before {
   content: "\e663";
+  font-size: 70px;
 }
 
 .icon-jiqiren:before {
   content: "\e70e";
+  font-size: 70px;
 }
-

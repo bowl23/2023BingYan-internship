@@ -1,0 +1,114 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(15, 104, 184);
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+/* 顶部标题 */
+header {
+    text-align: center;
+    color: aliceblue;
+    font-size: 40px;
+    font-weight: 1000;
+    text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.6);
+}
+
+/* 主体框 */
+.main {
+    color: black;
+    font-weight: 1000;
+    letter-spacing: 1px;
+    text-shadow: 0.5px 0 0 black, 0 0.5px 0 black, -0.5px 0 0 black, 0 -0.5px 0 black;
+    background-color: aliceblue;
+    height: 70%;
+    width: 85%;
+    padding: 20px 30px;
+    margin-top: 10px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 25px;
+}
+
+.main.text {
+    text-shadow: 3px 3px 3px rgba(0, 0, 0, 1);
+}
+
+/* 两个按钮 */
+.btn-container {
+    width: 80%;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.btn-container button {
+    color: aliceblue;
+    border: 1px;
+    width: 100%;
+    background-color: rgb(15, 104, 184);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 7px rgba(14, 96, 167, 0.2);
+    border-bottom: 5px rgb(17, 70, 116);
+}
+
+.btn-container button.iconfont {
+    width: 20%;
+    height: 80%;
+}
+
+.btn-container button .btn-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 20px;
+    width: 70%;
+    height: 50%;
+}
+
+.btn-container .play-header {
+    height: 50%;
+    font-size: 5px;
+    color: rgb(54, 205, 255);
+    font-weight: 1000;
+}
+
+.btn-container .choice {
+    height: 50%;
+    font-size: 30px;
+}
+
+
+
+/* 返回按键 */
+.back {
+    border: 1px;
+    background-color: rgb(222, 143, 110);
+    position: absolute;
+    bottom: 3%;
+    width: 30%;
+    height: 6%;
+    border-radius: 15px;
+    color: aliceblue;
+    font-size: 30px;
+    font-weight: 1000;
+    text-shadow: 4px 4px 4px rgb(0, 0, 0, 0);
+    left: 50%;
+    transform: translate(-50%) scale(1);
+    box-shadow: 0 5px rgb(182, 117, 89);
+    text-align: center;
+}
+
+.back:active {
+    transform: translate(-50%) scale(1.05);
+    transition: transform 0.1s ease-in-out;
+}
