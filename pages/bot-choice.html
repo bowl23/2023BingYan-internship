@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
@@ -7,16 +7,25 @@
         content="width=device-width, initial-scale=1.0 user-scalable=no initial-scale=1.0 ,maximum-scale=1.0,minimum-scale=1.0">
     <title>choice</title>
     <link rel="stylesheet" href="../style/bot-choice.css">
+    <link rel="stylesheet" href="../confont/bot_choice_cofont/iconfont.css">
 </head>
 
 <body>
-    <div class="header"></div>
+    <div class="header iconfont icon-EmojiAngry"></div>
     <div class="main">
-        <h1>EASY</h1>
+        <div class="difficulty-text">
+            <h1 class="easy">EASY</h1>
+            <h1 class="normal">NORMAL</h1>
+            <h1 class="hard">HARD</h1>
+        </div>
+        <input type="range" class="range" value="0" min="0" max="100">
         <h2>Drag to adjust difficulty</h2>
-        <div class="play">PLAY</div>
+        <div id="play" class="play">PLAY</div>
     </div>
-    <div class="back"></div>
+    <div id="back" class="back">
+        <span class="arrow iconfont icon-zuojiantou"></span>
+        <span class="back-text">Back</span>
+    </div>
 </body>
 <script src="../script/bot-choice.js"></script>
 
