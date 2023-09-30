@@ -1,0 +1,31 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(61, 74, 87);
+}
+
+.main {
+    background-color: rgb(51, 63, 79);
+    width: 80%;
+    height: 70%;
+    border-radius: 20px;
+    position: relative;
+    ;
+}
+
+.main h1 {
+    height: 30%;
+    line-height: 10rem;
+    text-align: center;
+    color: white;
+    font-size: 50px;
+}
