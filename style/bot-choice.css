@@ -74,8 +74,8 @@ a {
 .main .easy {}
 
 .main .normal {
-    transform: rotate3d(-1, 0, 0, 90deg);
-    transition: 1s;
+    transform: translate(0, -20px) rotate3d(-1, 0, 0, 90deg);
+    transition: 1s ease-out;
 }
 
 .main .hard {
