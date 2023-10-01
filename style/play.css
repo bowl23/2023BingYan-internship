@@ -1,0 +1,35 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(6, 93, 156);
+}
+
+canvas {
+    box-sizing: content-box;
+    width: 80vw;
+    height: 85vh;
+    border: 20px solid black;
+    background-color: aliceblue;
+}
+
+#score-band {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: aliceblue;
+    position: absolute;
+    left: -35px;
+    display: flex;
+    justify-content: center;
+    transform: rotate(90deg);
+}
