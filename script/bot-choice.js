@@ -6,8 +6,10 @@ play.addEventListener('touchstart', () => {
     console.log('play');
     play.classList.add('touch-start');
     play.classList.remove('untouch');
+
 })
 play.addEventListener('touchend', () => {
+    window.location.href = "../pages/play.html"
     play.classList.remove('touch-start');
     play.classList.add('untouch');
 })

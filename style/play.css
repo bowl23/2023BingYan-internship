@@ -14,15 +14,8 @@ body {
     background-color: rgb(6, 93, 156);
 }
 
-canvas {
-    box-sizing: content-box;
-    width: 80vw;
-    height: 85vh;
-    border: 20px solid black;
-    background-color: aliceblue;
-}
-
-#score-band {
+/* 比分板 */
+#scoreBand {
     width: 70px;
     height: 70px;
     border-radius: 50%;
@@ -32,4 +25,91 @@ canvas {
     display: flex;
     justify-content: center;
     transform: rotate(90deg);
+    font-size: 20px;
+    font-weight: 1000;
+    padding-top: 7px;
+}
+
+#scoreBand .red {
+    color: red;
+}
+
+#scoreBand .blue {
+    color: blue;
+}
+
+/* 退出按钮 */
+#exit {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: aliceblue;
+    position: absolute;
+    right: -35px;
+    display: flex;
+    justify-content: center;
+
+    transform: rotate(-90deg);
+    padding-top: 10px;
+    font-weight: 1000;
+}
+
+#exit.touch {
+    transform: rotate(-90deg) scale(1.2);
+    transition: 0.1s ease-out;
+}
+
+/* 棋盘 */
+#desk {
+    width: 85%;
+    height: 90%;
+    background-color: aliceblue;
+    border: 20px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    position: relative;
+}
+
+#redLine {
+    width: 100%;
+    height: 2%;
+    background-color: red;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+}
+
+.player {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 50%;
+    z-index: 1;
+    position: absolute;
+}
+
+#blueBall {
+    background-color: blue;
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    transform: translate(-50%);
+}
+
+#redBall {
+    background-color: red;
+    left: 50%;
+    bottom: 10%;
+    transform: translate(-50%, 0);
+}
+
+#blackBall {
+    width: 4rem;
+    height: 4rem;
+    background-color: black;
+    border-radius: 50%;
+    z-index: 1;
 }

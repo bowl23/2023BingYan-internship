@@ -1,11 +1,13 @@
-window.onload = () => {
-    /** @type {HTMLCanvasElement} */
-    var desk = document.getElementById('desk');
-    var cxt = desk.getContext('2d')
+// 退出按钮
+const exit = document.getElementById('exit')
+exit.addEventListener('touchstart', () => {
+    exit.classList.add('touch');
+})
+exit.addEventListener('touchend', () => {
+    window.location.href = '../pages/index.html'
+    exit.classList.remove('touch')
+})
 
-    cxt.moveTo(0, desk.height / 2);
-    cxt.lineTo(desk.width, desk.height / 2);
-    cxt.strokeStyle = "red"
-    cxt.lineWidth = 4
-    cxt.stroke()
-}
+const redBall = document.getElementById('redBall');
+const blackBall = document.getElementById('blackBall');
+const blueBall = document.getElementById('blueBall');
