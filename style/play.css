@@ -61,15 +61,36 @@ body {
 
 /* 棋盘 */
 #desk {
-    width: 85%;
-    height: 90%;
+    box-sizing: content-box;
+    padding: 0;
+    margin: 0;
+    width: 80%;
+    height: 80%;
     background-color: aliceblue;
     border: 20px solid black;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
     position: relative;
+}
+
+#blueGate {
+    height: 20px;
+    width: 30%;
+    background-color: rgb(2, 172, 243);
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%);
+    border: 3px solid black;
+}
+
+#redGate {
+    height: 20px;
+    width: 30%;
+    background-color: rgb(254, 95, 87);
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translate(-50%);
+    border: 3px solid black;
 }
 
 #redLine {
@@ -84,32 +105,39 @@ body {
 }
 
 .player {
+    box-sizing: border-box;
     width: 6rem;
     height: 6rem;
     border-radius: 50%;
     z-index: 1;
     position: absolute;
+    /* border: 10px solid black; */
 }
 
 #blueBall {
-    background-color: blue;
+    background-color: rgb(2, 172, 243);
     position: absolute;
     left: 50%;
     top: 10%;
-    transform: translate(-50%);
+    transform: translate(-50%, -10%);
 }
 
 #redBall {
-    background-color: red;
+    background-color: rgb(254, 95, 87);
     left: 50%;
-    bottom: 10%;
-    transform: translate(-50%, 0);
+    top: 90%;
+    transform: translate(-50%, -90%);
 }
 
 #blackBall {
     width: 4rem;
     height: 4rem;
-    background-color: black;
+    background-color: rgb(68, 75, 84);
     border-radius: 50%;
     z-index: 1;
+    border: 10px solid black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
