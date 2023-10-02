@@ -34,6 +34,7 @@ redBall.addEventListener('touchmove', (e) => {
     redBall.style.left = x + 'px'
     redBall.style.top = y + 'px'
     check();
+    checkCollision();
 });
 redBall.addEventListener('touchend', () => {
     isDragging = false;
@@ -50,16 +51,34 @@ function check() {
     const ballBottom = desk.clientHeight - ballTop - redBall.offsetHeight;
     // console.log(ballLeft);
     if (ballLeft <= 0) {
-        redBall.style.left = (redBall.offsetWidth / 2) + 'px';
+        redBall.style.left = `${redBall.offsetWidth / 2}px`;
     }
     if (ballRight <= 0) {
-        console.log('out');
-        redBall.style.left = desk.clientWidth - redBall.offsetWidth + 'px'
+        1
+        redBall.style.left = `${desk.clientWidth - redBall.offsetWidth}px`
     }
     if (ballTop <= 0) {
-        redBall.style.top = desk.offsetTop + 'px'
+        redBall.style.top = `${desk.offsetTop}px`
     }
     if (ballBottom < 0) {
-        redBall.style.top = desk.clientHeight - redBall.offsetHeight + 'px'
+        redBall.style.top = `${desk.clientHeight - redBall.offsetHeight}px`
+    }
+}
+// 碰撞
+function checkCollision() {
+    const redLeft = redBall.getBoundingClientRect().left;
+    const redRight = redBall.getBoundingClientRect().right;
+    const redTop = redBall.getBoundingClientRect().top
+    const redBottom = redBall.getBoundingClientRect().bottom;
+    const blackLeft = blackBall.getBoundingClientRect().left;
+    const blackRight = blackBall.getBoundingClientRect().right;
+    const blackTop = blackBall.getBoundingClientRect().top;
+    const blackBottom = blackBall.getBoundingClientRect().bottom;
+
+    if (!(redLeft > blackRight || redRight < blackLeft || redTop > blackBottom || redBottom < blackTop)) {
+        console.log("yes");
+    }
+    else {
+        console.log('no');
     }
 }
