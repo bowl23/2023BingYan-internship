@@ -11,6 +11,7 @@ back.addEventListener('touchstart', () => {
 back.addEventListener('touchend', () => {
     back.classList.add('untouch')
     back.classList.remove('touch-start')
+    window.alert('不准跑！')
 })
 pvpBtn.addEventListener('touchstart', () => {
     people.classList.add('touch')
@@ -23,6 +24,7 @@ pvpBtn.addEventListener('touchend', () => {
     people.classList.remove('touch')
     pvpBtn.classList.add('untouch')
     pvpBtn.classList.remove('touch-start')
+    window.location.href = 'play(canvas).html'
 })
 pveBtn.addEventListener('touchstart', () => {
     bot.classList.add('touch')
@@ -35,4 +37,5 @@ pveBtn.addEventListener('touchend', () => {
     bot.classList.remove('touch')
     pveBtn.classList.add('untouch')
     pveBtn.classList.remove('touch-start')
+    window.location.href = 'bot-choice.html'
 })

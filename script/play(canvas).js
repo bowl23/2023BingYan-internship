@@ -254,8 +254,8 @@ function dragRedBall() {
         mouse1.y = touch.pageY - cnvRect.top;
         redBall.x = mouse1.x;
         redBall.y = mouse1.y;
-        oldX = mouse1.x;
-        oldY = mouse1.y;
+        oldX = redBall.x;
+        oldY = redBall.y;
         checkRedBorder();
         redCheckCollision();
     })
@@ -267,7 +267,7 @@ function dragRedBall() {
 
 }
 
-// 小蓝球的拖拽
+// 蓝球的拖拽
 function dragBlueBall() {
     cnv.addEventListener('touchstart', (e) => {
         // 检测是否捕获到小蓝球
@@ -295,8 +295,8 @@ function dragBlueBall() {
         mouse2.y = touch.pageY - cnvRect.top;
         blueBall.x = mouse2.x;
         blueBall.y = mouse2.y;
-        oldX = mouse2.x;
-        oldY = mouse2.y;
+        oldX = blueBall.x;
+        oldY = blueBall.y;
         checkBlueBorder();
         blueCheckCollision();
     })
