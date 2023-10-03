@@ -3,7 +3,8 @@ const cnv = document.getElementById('canvas')
 const cxt = cnv.getContext('2d');
 const cnvRect = cnv.getBoundingClientRect()
 
-let isDragging = false;
+let redIsDragging = false;
+let blueIsDragging = false;
 let oldX = 0;
 let oldY = 0;
 
@@ -90,13 +91,39 @@ function checkRedBorder() {
     }
 }
 
+function checkBlueBorder() {
+    if (blueBall.x < blueBall.radius) {
+        blueBall.x = blueBall.radius + 10;
+    }
+    if (blueBall.x > cnv.width - blueBall.radius) {
+        blueBall.x = cnv.width - blueBall.radius - 10;
+    }
+    if (blueBall.y < blueBall.radius) {
+        blueBall.y = blueBall.radius + 10
+    }
+    if (blueBall.y > cnv.height / 2 - blueBall.radius) {
+        blueBall.y = cnv.height / 2 - blueBall.radius
+    }
+}
 
-// 碰撞检测
-function checkcollision() {
+
+//红球碰撞检测
+function redCheckCollision() {
     let dx = redBall.x - blackBall.x
     let dy = redBall.y - blackBall.y
     let distance = Math.sqrt(dx * dx + dy * dy);
     if (distance < redBall.radius + blackBall.radius) {
+        blackBall.vx = -(oldX - blackBall.x) / 10;//除十是发现速度太快了，目前还没找到更好的方法。
+        blackBall.vy = -(oldY - blackBall.y) / 10;
+        console.log('collision');
+    }
+}
+//蓝球碰撞检测
+function blueCheckCollision() {
+    let dx = blueBall.x - blackBall.x
+    let dy = blueBall.y - blackBall.y
+    let distance = Math.sqrt(dx * dx + dy * dy);
+    if (distance < blueBall.radius + blackBall.radius) {
         blackBall.vx = -(oldX - blackBall.x) / 10;//除十是发现速度太快了，目前还没找到更好的方法。
         blackBall.vy = -(oldY - blackBall.y) / 10;
         console.log('collision');
@@ -125,12 +152,20 @@ function blackBallBounce() {
         blackBall.vy = -blackBall.vy
     }
 
-    let dx = redBall.x - blackBall.x
-    let dy = redBall.y - blackBall.y
-    let distance = Math.sqrt(dx * dx + dy * dy);
-    if (distance < redBall.radius + blackBall.radius) {
-        blackBall.vx = -(oldX - blackBall.x) / 10;//除十是发现速度太快了，目前还没找到更好的方法。
-        blackBall.vy = -(oldY - blackBall.y) / 10;
+    let rx = redBall.x - blackBall.x
+    let ry = redBall.y - blackBall.y
+    let rdistance = Math.sqrt(rx * rx + ry * ry);
+    if (rdistance < redBall.radius + blackBall.radius) {
+        blackBall.vx = -(oldX - blackBall.x) / 20;//除十是发现速度太快了，目前还没找到更好的方法。
+        blackBall.vy = -(oldY - blackBall.y) / 20;
+    }
+
+    let bx = blueBall.x - blackBall.x
+    let by = blueBall.y - blackBall.y
+    let bdistance = Math.sqrt(bx * bx + by * by);
+    if (bdistance < blueBall.radius + blackBall.radius) {
+        blackBall.vx = -(oldX - blackBall.x) / 20;//除十是发现速度太快了，目前还没找到更好的方法。
+        blackBall.vy = -(oldY - blackBall.y) / 20;
     }
 }
 
@@ -149,15 +184,15 @@ function dragRedBall() {
         let dy = mouse1.y - redBall.y
         let dsitance = Math.sqrt(dx * dx + dy * dy);
         if (dsitance < redBall.radius) {
-            isDragging = true;
-            console.log('in');
+            redIsDragging = true;
+            console.log('red');
         }
 
     })
 
     cnv.addEventListener('touchmove', (e) => {
 
-        if (!isDragging) {
+        if (!redIsDragging) {
             return;
         }
         const touch = e.touches[0];
@@ -168,11 +203,11 @@ function dragRedBall() {
         oldX = mouse1.x;
         oldY = mouse1.y;
         checkRedBorder();
-        checkcollision();
+        redCheckCollision();
     })
 
     cnv.addEventListener('touchend', () => {
-        isDragging = false;
+        redIsDragging = false;
         return;
     })
 
@@ -192,15 +227,15 @@ function dragBlueBall() {
         let dy = mouse2.y - blueBall.y
         let dsitance = Math.sqrt(dx * dx + dy * dy);
         if (dsitance < blueBall.radius) {
-            isDragging = true;
-            console.log('in');
+            blueIsDragging = true;
+            console.log('blue');
         }
 
     })
 
     cnv.addEventListener('touchmove', (e) => {
 
-        if (!isDragging) {
+        if (!blueIsDragging) {
             return;
         }
         const touch = e.touches[0];
@@ -210,12 +245,12 @@ function dragBlueBall() {
         blueBall.y = mouse2.y;
         oldX = mouse2.x;
         oldY = mouse2.y;
-        checkBorder();
-        checkcollision();
+        checkBlueBorder();
+        blueCheckCollision();
     })
 
     cnv.addEventListener('touchend', () => {
-        isDragging = false;
+        blueIsDragging = false;
         return;
     })
 
@@ -223,7 +258,7 @@ function dragBlueBall() {
 
 // 拖拽
 dragRedBall();
-// dragBlueBall();
+dragBlueBall();
 
 
 (function drawFrame() {
