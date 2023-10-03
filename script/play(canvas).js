@@ -1,3 +1,17 @@
+// 退出按钮
+const exit = document.getElementById('exit')
+exit.addEventListener('touchstart', () => {
+    exit.classList.add('touch');
+})
+exit.addEventListener('touchend', () => {
+    window.location.href = '../pages/index.html'
+    exit.classList.remove('touch')
+})
+
+// 积分
+const redScore = document.getElementById('redScore');
+const blueScore = document.getElementById('blueScore');
+
 /** @type {HTMLCanvasElement} */
 const cnv = document.getElementById('canvas')
 const cxt = cnv.getContext('2d');
@@ -5,8 +19,11 @@ const cnvRect = cnv.getBoundingClientRect()
 
 let redIsDragging = false;
 let blueIsDragging = false;
+let redWin = 0;
+let blueWin = 0;
 let oldX = 0;
 let oldY = 0;
+let final = false;
 
 // 定义三个小球的参数
 const redBall = {
@@ -48,12 +65,28 @@ function drawDesk() {
     cxt.rect(0, 0, cnv.width, cnv.height)
     cxt.strokeStyle = 'black'
     cxt.stroke();
+
+    cxt.beginPath();
+    cxt.lineWidth = 20;
+    cxt.strokeStyle = 'rgb(2, 172, 243)';
+    cxt.moveTo(130, 0);
+    cxt.lineTo(270, 0);
+    cxt.stroke();
+
+    cxt.beginPath();
+    cxt.lineWidth = 20;
+    cxt.strokeStyle = 'rgb(254, 95, 87)';
+    cxt.moveTo(130, cnv.height);
+    cxt.lineTo(270, cnv.height);
+    cxt.stroke();
+
     cxt.beginPath();
     cxt.lineWidth = 15;
-    cxt.strokeStyle = 'red';
+    cxt.strokeStyle = 'rgb(241, 53, 106)';
     cxt.moveTo(10, 350);
     cxt.lineTo(390, 350);
     cxt.stroke();
+
 }
 
 
@@ -61,17 +94,42 @@ function drawDesk() {
 function drawBall() {
     cxt.beginPath();
     cxt.arc(redBall.x, redBall.y, redBall.radius, 0, 2 * Math.PI);
-    cxt.fillStyle = 'rgb(254, 95, 87)'
-    cxt.fill()
+    cxt.fillStyle = 'rgb(254, 95, 87)';
+    cxt.fill();
+    cxt.beginPath();
+    cxt.strokeStyle = 'black';
+    cxt.lineWidth = 10;
+    cxt.arc(redBall.x, redBall.y, 35, 0, 2 * Math.PI);
+    cxt.stroke();
+    cxt.beginPath();
+    cxt.arc(redBall.x, redBall.y, 15, 0, 2 * Math.PI);
+    cxt.stroke();
+
+
     cxt.beginPath();
     cxt.arc(blueBall.x, blueBall.y, blueBall.radius, 0, 2 * Math.PI);
-    cxt.fillStyle = 'rgb(2, 172, 243)'
+    cxt.fillStyle = 'rgb(2, 172, 243)';
     cxt.fill();
+    cxt.beginPath();
+    cxt.strokeStyle = 'black';
+    cxt.lineWidth = 10;
+    cxt.arc(blueBall.x, blueBall.y, 35, 0, 2 * Math.PI);
+    cxt.stroke();
+    cxt.beginPath();
+    cxt.arc(blueBall.x, blueBall.y, 15, 0, 2 * Math.PI);
+    cxt.stroke();
 
     cxt.beginPath();
     cxt.arc(blackBall.x, blackBall.y, blackBall.radius, 0, 2 * Math.PI);
-    cxt.fillStyle = 'rgb(68, 75, 84)'
-    cxt.fill()
+    cxt.fillStyle = 'rgb(68, 75, 84)';
+    cxt.fill();
+    cxt.beginPath();
+    cxt.strokeStyle = 'black';
+    cxt.lineWidth = 10;
+    cxt.arc(blackBall.x, blackBall.y, 25, 0, 2 * Math.PI);
+    cxt.stroke();
+
+
 }
 
 
@@ -115,7 +173,6 @@ function redCheckCollision() {
     if (distance < redBall.radius + blackBall.radius) {
         blackBall.vx = -(oldX - blackBall.x) / 10;//除十是发现速度太快了，目前还没找到更好的方法。
         blackBall.vy = -(oldY - blackBall.y) / 10;
-        console.log('collision');
     }
 }
 //蓝球碰撞检测
@@ -126,7 +183,6 @@ function blueCheckCollision() {
     if (distance < blueBall.radius + blackBall.radius) {
         blackBall.vx = -(oldX - blackBall.x) / 10;//除十是发现速度太快了，目前还没找到更好的方法。
         blackBall.vy = -(oldY - blackBall.y) / 10;
-        console.log('collision');
     }
 }
 
@@ -139,16 +195,16 @@ function ballMove() {
 
 // 小黑球的反弹
 function blackBallBounce() {
-    if (blackBall.x < blackBall.radius) {
+    if (blackBall.x < blackBall.radius + 10) {
         blackBall.vx = -blackBall.vx
     }
-    if (blackBall.x > cnv.width - blackBall.radius) {
+    if (blackBall.x > cnv.width - blackBall.radius - 10) {
         blackBall.vx = -blackBall.vx
     }
-    if (blackBall.y < blackBall.radius) {
+    if (blackBall.y <= blackBall.radius + 10) {
         blackBall.vy = -blackBall.vy
     }
-    if (blackBall.y > cnv.height - blackBall.radius) {
+    if (blackBall.y > cnv.height - blackBall.radius - 10) {
         blackBall.vy = -blackBall.vy
     }
 
@@ -174,7 +230,6 @@ function blackBallBounce() {
 function dragRedBall() {
     cnv.addEventListener('touchstart', (e) => {
         // 检测是否捕获到小红球
-        console.log('touchstart');
         const touch = e.touches[0];
         mouse1.x = touch.pageX - cnvRect.left;
         mouse1.y = touch.pageY - cnvRect.top;
@@ -185,7 +240,6 @@ function dragRedBall() {
         let dsitance = Math.sqrt(dx * dx + dy * dy);
         if (dsitance < redBall.radius) {
             redIsDragging = true;
-            console.log('red');
         }
 
     })
@@ -217,7 +271,6 @@ function dragRedBall() {
 function dragBlueBall() {
     cnv.addEventListener('touchstart', (e) => {
         // 检测是否捕获到小蓝球
-        console.log('touchstart');
         const touch = e.touches[0];
         mouse2.x = touch.pageX - cnvRect.left;
         mouse2.y = touch.pageY - cnvRect.top;
@@ -228,7 +281,6 @@ function dragBlueBall() {
         let dsitance = Math.sqrt(dx * dx + dy * dy);
         if (dsitance < blueBall.radius) {
             blueIsDragging = true;
-            console.log('blue');
         }
 
     })
@@ -256,17 +308,50 @@ function dragBlueBall() {
 
 }
 
+function score() {
+    if (blackBall.x >= 130 && blackBall.x <= 270 && blackBall.y <= blackBall.radius + 10) {
+        redWin++;
+        console.log("blue");
+        final = true;
+    }
+    if (blackBall.x >= 130 && blackBall.x <= 270 && blackBall.y >= cnv.height - blackBall.radius - 10) {
+        blueWin++;
+        console.log("red");
+        final = true;
+    }
+    redScore.textContent = redWin;
+    blueScore.textContent = blueWin;
+    if (final) {
+        blackBall.vx = 0;
+        blackBall.vy = 0;
+        blackBall.x = cnv.width / 2;
+        blackBall.y = cnv.height / 2;
+        redBall.x = cnv.width / 2;
+        redBall.y = 3 * cnv.height / 4;
+        blueBall.x = cnv.width / 2;
+        blueBall.y = cnv.height / 4;
+        final = false;
+    }
+}
+
+
 // 拖拽
 dragRedBall();
 dragBlueBall();
 
 
 (function drawFrame() {
-    window.requestAnimationFrame(drawFrame);
+
     cxt.clearRect(0, 0, cnv.width, cnv.height)
     ballMove();
     blackBallBounce();
     //画出棋盘
     drawDesk();
     drawBall();
+    score();
+    if (redWin == 3 || blueWin == 3) {
+        console.log('GAME OVER');
+        return;
+    }
+    window.requestAnimationFrame(drawFrame);
 })()

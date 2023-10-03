@@ -9,7 +9,7 @@ play.addEventListener('touchstart', () => {
 
 })
 play.addEventListener('touchend', () => {
-    window.location.href = "../pages/play.html"
+    window.location.href = "../pages/play(canvas).html"
     play.classList.remove('touch-start');
     play.classList.add('untouch');
 })
