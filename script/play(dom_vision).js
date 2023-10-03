@@ -15,13 +15,14 @@ const blueBall = document.getElementById('blueBall');
 let isDragging = false;
 let offsetX = 0;
 let offsetY = 0;
-
+// 拖拽
 redBall.addEventListener('touchstart', (e) => {
     // console.log("red");
     const touch = e.touches[0];
     isDragging = true;
     offsetX = touch.clientX - redBall.getBoundingClientRect().left;
     offsetY = touch.clientY - redBall.getBoundingClientRect().top;//这个偏移量的问题处在哪里目前还没解决。
+    console.log(offsetX, offsetY);
 })
 
 redBall.addEventListener('touchmove', (e) => {
@@ -51,7 +52,7 @@ function check() {
     const ballBottom = desk.clientHeight - ballTop - redBall.offsetHeight;
     // console.log(ballLeft);
     if (ballLeft <= 0) {
-        redBall.style.left = `${redBall.offsetWidth / 2}px`;
+        redBall.style.left = `0px`;
     }
     if (ballRight <= 0) {
         1
