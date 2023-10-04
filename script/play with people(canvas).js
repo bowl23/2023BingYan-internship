@@ -12,6 +12,7 @@ exit.addEventListener('touchend', () => {
 const redScore = document.getElementById('redScore');
 const blueScore = document.getElementById('blueScore');
 
+// 初始化一些变量
 /** @type {HTMLCanvasElement} */
 const cnv = document.getElementById('canvas')
 const cxt = cnv.getContext('2d');
@@ -21,23 +22,30 @@ let redIsDragging = false;
 let blueIsDragging = false;
 let redWin = 0;
 let blueWin = 0;
-let oldX = 0;
-let oldY = 0;
+let oldBlueX = 0;
+let oldBlueY = 0;
+let oldRedX = 0;
+let oldRedY = 0;
 let final = false;
 
+
 // 定义三个小球的参数
+
+// 小红
 const redBall = {
     x: cnv.width / 2,
     y: 3 * cnv.height / 4,
     radius: 40,
 }
 
+// 小蓝
 const blueBall = {
     x: cnv.width / 2,
     y: cnv.height / 4,
     radius: 40,
 }
 
+// 小黑
 const blackBall = {
     x: cnv.width / 2,
     y: cnv.height / 2,
@@ -48,10 +56,14 @@ const blackBall = {
 
 
 // 用来存放此时鼠标的位置
+
+// 鼠标1
 const mouse1 = {
     x: 0,
     y: 0,
 }
+
+// 鼠标2
 const mouse2 = {
     x: 0,
     y: 0,
@@ -134,6 +146,8 @@ function drawBall() {
 
 
 // 边界检测
+
+// 红球边界检测
 function checkRedBorder() {
     if (redBall.x < redBall.radius) {
         redBall.x = redBall.radius + 10;
@@ -149,6 +163,7 @@ function checkRedBorder() {
     }
 }
 
+// 蓝球边界检测
 function checkBlueBorder() {
     if (blueBall.x < blueBall.radius) {
         blueBall.x = blueBall.radius + 10;
@@ -164,6 +179,7 @@ function checkBlueBorder() {
     }
 }
 
+// 碰撞检测
 
 //红球碰撞检测
 function redCheckCollision() {
@@ -171,22 +187,24 @@ function redCheckCollision() {
     let dy = redBall.y - blackBall.y
     let distance = Math.sqrt(dx * dx + dy * dy);
     if (distance < redBall.radius + blackBall.radius) {
-        blackBall.vx = -(oldX - blackBall.x) / 10;//除十是发现速度太快了，目前还没找到更好的方法。
-        blackBall.vy = -(oldY - blackBall.y) / 10;
+        blackBall.vx = -(oldRedX - blackBall.x) / 5;//除十是发现速度太快了，目前还没找到更好的方法。
+        blackBall.vy = -(oldRedY - blackBall.y) / 5;
     }
 }
+
 //蓝球碰撞检测
 function blueCheckCollision() {
     let dx = blueBall.x - blackBall.x
     let dy = blueBall.y - blackBall.y
     let distance = Math.sqrt(dx * dx + dy * dy);
     if (distance < blueBall.radius + blackBall.radius) {
-        blackBall.vx = -(oldX - blackBall.x) / 10;//除十是发现速度太快了，目前还没找到更好的方法。
-        blackBall.vy = -(oldY - blackBall.y) / 10;
+        blackBall.vx = -(oldBlueX - blackBall.x) / 5;//除十是发现速度太快了，目前还没找到更好的方法。
+        blackBall.vy = -(oldBlueY - blackBall.y) / 5;
     }
 }
 
 
+// 小球移动
 function ballMove() {
     blackBall.x += blackBall.vx;
     blackBall.y += blackBall.vy;
@@ -195,6 +213,7 @@ function ballMove() {
 
 // 小黑球的反弹
 function blackBallBounce() {
+    // 边界检测
     if (blackBall.x < blackBall.radius + 10) {
         blackBall.vx = -blackBall.vx
     }
@@ -212,16 +231,16 @@ function blackBallBounce() {
     let ry = redBall.y - blackBall.y
     let rdistance = Math.sqrt(rx * rx + ry * ry);
     if (rdistance < redBall.radius + blackBall.radius) {
-        blackBall.vx = -(oldX - blackBall.x) / 20;//除十是发现速度太快了，目前还没找到更好的方法。
-        blackBall.vy = -(oldY - blackBall.y) / 20;
+        blackBall.vx = (blackBall.x - oldRedX) / 5;//除十是发现速度太快了，目前还没找到更好的方法。
+        blackBall.vy = (blackBall.y - oldRedY) / 5;
     }
 
     let bx = blueBall.x - blackBall.x
     let by = blueBall.y - blackBall.y
     let bdistance = Math.sqrt(bx * bx + by * by);
     if (bdistance < blueBall.radius + blackBall.radius) {
-        blackBall.vx = -(oldX - blackBall.x) / 20;//除十是发现速度太快了，目前还没找到更好的方法。
-        blackBall.vy = -(oldY - blackBall.y) / 20;
+        blackBall.vx = (blackBall.x - oldBlueX) / 5;//除十是发现速度太快了，目前还没找到更好的方法。
+        blackBall.vy = (blackBall.x - oldBlueY) / 5;
     }
 }
 
@@ -254,8 +273,6 @@ function dragRedBall() {
         mouse1.y = touch.pageY - cnvRect.top;
         redBall.x = mouse1.x;
         redBall.y = mouse1.y;
-        oldX = redBall.x;
-        oldY = redBall.y;
         checkRedBorder();
         redCheckCollision();
     })
@@ -295,8 +312,6 @@ function dragBlueBall() {
         mouse2.y = touch.pageY - cnvRect.top;
         blueBall.x = mouse2.x;
         blueBall.y = mouse2.y;
-        oldX = blueBall.x;
-        oldY = blueBall.y;
         checkBlueBorder();
         blueCheckCollision();
     })
@@ -307,7 +322,7 @@ function dragBlueBall() {
     })
 
 }
-
+// 得分计数
 function score() {
     if (blackBall.x >= 130 && blackBall.x <= 270 && blackBall.y <= blackBall.radius + 10) {
         redWin++;
@@ -341,8 +356,11 @@ dragBlueBall();
 
 
 (function drawFrame() {
-
-    cxt.clearRect(0, 0, cnv.width, cnv.height)
+    cxt.clearRect(0, 0, cnv.width, cnv.height);
+    oldBlueX = blueBall.x;
+    oldBlueY = blueBall.y;
+    oldRedX = redBall.x;
+    oldRedY = redBall.y;
     ballMove();
     blackBallBounce();
     //画出棋盘
