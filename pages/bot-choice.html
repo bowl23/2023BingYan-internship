@@ -13,12 +13,14 @@
 <body>
     <div class="header iconfont icon-EmojiAngry"></div>
     <div class="main">
-        <div class="difficulty-text">
-            <h1 class="easy">EASY</h1>
-            <h1 class="normal">NORMAL</h1>
-            <h1 class="hard">HARD</h1>
+        <div class="difficulty-container">
+            <div class="difficulty-text">
+                EASY<br>
+                NORMAL<br>
+                HARD<br>
+            </div>
         </div>
-        <input type="range" class="range" value="0" min="0" max="100">
+        <input type="range" id="range" class="range" value="0" min="0" max="100">
         <h2>Drag to adjust difficulty</h2>
         <div id="play" class="play">PLAY</div>
     </div>

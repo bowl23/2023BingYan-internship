@@ -206,7 +206,7 @@ function blueCheckCollision() {
 function ballMove() {
     blackBall.x += blackBall.vx;
     blackBall.y += blackBall.vy;
-    blueBall.vx = blackBall.vx * 0.5;
+    blueBall.vx = blackBall.vx * 0.1;
     blueBall.x += blueBall.vx;
     blueBall.vy = 0;
     if (blackBall.y >= cnv.height / 2 && blueBall.y == cnv.height / 4) {
@@ -371,9 +371,22 @@ dragRedBall();
     drawDesk();
     drawBall();
     score();
-    if (redWin == 3 || blueWin == 3) {
-        console.log('GAME OVER');
+    if (redWin == 3) {
+        const musk = document.createElement('div');
+        musk.classList.add('musk');
+        musk.textContent = 'RED WIN'
+        musk.classList.add('red-musk')
+        document.body.appendChild(musk);
+        return;
+    }
+    if (blueWin == 3) {
+        const musk = document.createElement('div');
+        musk.classList.add('musk');
+        musk.textContent = 'BLUE WIN'
+        musk.classList.add('blue-musk')
+        document.body.appendChild(musk);
         return;
     }
     window.requestAnimationFrame(drawFrame);
 })()
+
