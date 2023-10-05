@@ -52,10 +52,11 @@ a {
 .difficulty-container {
     display: flex;
     margin-top: 8rem;
-    height: 14%;
-    width: 80%;
+    height: 5rem;
+    width: 100%;
     justify-content: center;
-    overflow: hidden;
+    overflow: hidden;/
+    /* border: 1px solid black; */
 }
 
 .main .difficulty-text {
@@ -63,9 +64,13 @@ a {
     top: 0;
     text-align: center;
     color: white;
-    font-size: 50px;
-    line-height: 52px;
+    font-size: 4rem;
+    line-height: 4rem;
+    height: 12rem;
+    width: 100%;
+    /* border: 1px solid red; */
 }
+
 
 .main h2 {
     height: 30%;

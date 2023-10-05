@@ -201,8 +201,8 @@ function redCheckCollision() {
     let ry = redBall.y - blackBall.y
     let distance = Math.sqrt(rx * rx + ry * ry);
     if (distance < redBall.radius + blackBall.radius) {
-        blackBall.vx = -rx / 5;
-        blackBall.vy = -ry / 5;
+        blackBall.vx = -rx / 10;
+        blackBall.vy = -ry / 10;
     }
 }
 
@@ -212,8 +212,8 @@ function blueCheckCollision() {
     let by = blueBall.y - blackBall.y
     let distance = Math.sqrt(bx * bx + by * by);
     if (distance < blueBall.radius + blackBall.radius) {
-        blackBall.vx = -bx / 5;
-        blackBall.vy = -by / 5;
+        blackBall.vx = -bx / 10;
+        blackBall.vy = -by / 10;
     }
 }
 
@@ -344,7 +344,6 @@ function score() {
 getDiff();
 // 拖拽
 dragRedBall();
-// dragBlueBall();
 
 
 (function drawFrame() {

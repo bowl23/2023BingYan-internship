@@ -29,22 +29,22 @@ let textTop = 0
 const textHeight = difficultyText.clientHeight;
 range.addEventListener('input', () => {
 
-    textTop = 100 * range.value / textHeight;
+    textTop = 2 * range.value;
     difficultyText.style.top = `-${textTop}%`;
 })
 
 range.addEventListener('touchend', () => {
     if (range.value < 20) {
         range.value = 0;
-        textTop = 100 * range.value / textHeight;
+        textTop = 2 * range.value;
     }
     else if (range.value <= 80) {
         range.value = 50;
-        textTop = 100 * range.value / textHeight;
+        textTop = 2 * range.value;
     }
     else {
         range.value = 100
-        textTop = 100 * range.value / textHeight;
+        textTop = 2 * range.value;
     }
     difficultyText.style.top = `-${textTop}%`
 
