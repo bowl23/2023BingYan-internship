@@ -73,9 +73,9 @@ canvas {
 }
 
 .red-musk {
-    background-color: rgba(254, 95, 87, 0.9);
+    background-color: rgba(254, 95, 87, 0.1);
 }
 
 .blue-musk {
-    background-color: rgb(2, 172, 243, 0.9);
+    background-color: rgb(2, 172, 243, 0.1);
 }
