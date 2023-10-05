@@ -59,3 +59,23 @@ canvas {
     transform: rotate(-90deg) scale(1.2);
     transition: 0.1s ease-out;
 }
+
+.musk {
+    width: 100vw;
+    height: 100vh;
+    color: aliceblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50px;
+    font-weight: 1000;
+    position: absolute;
+}
+
+.red-musk {
+    background-color: rgba(254, 95, 87, 0.9);
+}
+
+.blue-musk {
+    background-color: rgb(2, 172, 243, 0.9);
+}

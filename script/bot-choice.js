@@ -25,11 +25,39 @@ back.addEventListener('touchend', () => {
     window.location.href = './index.html'
 })
 
-
+let textTop = 0
+const textHeight = difficultyText.clientHeight;
 range.addEventListener('input', () => {
-    const textHeight = difficultyText.clientHeight;
-    console.log(textHeight);
-    const textTop = 100 * range.value / difficultyText.clientHeight;
-    console.log(textTop);
+
+    textTop = 100 * range.value / textHeight;
     difficultyText.style.top = `-${textTop}%`;
 })
+
+range.addEventListener('touchend', () => {
+    if (range.value < 20) {
+        range.value = 0;
+        textTop = 100 * range.value / textHeight;
+    }
+    else if (range.value <= 80) {
+        range.value = 50;
+        textTop = 100 * range.value / textHeight;
+    }
+    else {
+        range.value = 100
+        textTop = 100 * range.value / textHeight;
+    }
+    difficultyText.style.top = `-${textTop}%`
+
+    // 控制难度
+    if (range.value == 0) {
+        localStorage.setItem('diff', 'easy');
+    }
+    if (range.value == 50) {
+        localStorage.setItem('diff', 'normal');
+    }
+    if (range.value == 100) {
+        localStorage.setItem('diff', 'hard');
+    }
+
+})
+

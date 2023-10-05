@@ -22,10 +22,6 @@ let redIsDragging = false;
 let blueIsDragging = false;
 let redWin = 0;
 let blueWin = 0;
-let oldBlueX = 0;
-let oldBlueY = 0;
-let oldRedX = 0;
-let oldRedY = 0;
 let final = false;
 
 
@@ -183,23 +179,23 @@ function checkBlueBorder() {
 
 //红球碰撞检测
 function redCheckCollision() {
-    let dx = redBall.x - blackBall.x
-    let dy = redBall.y - blackBall.y
-    let distance = Math.sqrt(dx * dx + dy * dy);
+    let rx = redBall.x - blackBall.x
+    let ry = redBall.y - blackBall.y
+    let distance = Math.sqrt(rx * rx + ry * ry);
     if (distance < redBall.radius + blackBall.radius) {
-        blackBall.vx = -(oldRedX - blackBall.x) / 5;//除十是发现速度太快了，目前还没找到更好的方法。
-        blackBall.vy = -(oldRedY - blackBall.y) / 5;
+        blackBall.vx = -rx / 5;
+        blackBall.vy = -ry / 5;
     }
 }
 
 //蓝球碰撞检测
 function blueCheckCollision() {
-    let dx = blueBall.x - blackBall.x
-    let dy = blueBall.y - blackBall.y
-    let distance = Math.sqrt(dx * dx + dy * dy);
+    let bx = blueBall.x - blackBall.x
+    let by = blueBall.y - blackBall.y
+    let distance = Math.sqrt(bx * bx + by * by);
     if (distance < blueBall.radius + blackBall.radius) {
-        blackBall.vx = -(oldBlueX - blackBall.x) / 5;//除十是发现速度太快了，目前还没找到更好的方法。
-        blackBall.vy = -(oldBlueY - blackBall.y) / 5;
+        blackBall.vx = -bx / 5;
+        blackBall.vy = -by / 5;
     }
 }
 
@@ -227,21 +223,8 @@ function blackBallBounce() {
         blackBall.vy = -blackBall.vy
     }
 
-    let rx = redBall.x - blackBall.x
-    let ry = redBall.y - blackBall.y
-    let rdistance = Math.sqrt(rx * rx + ry * ry);
-    if (rdistance < redBall.radius + blackBall.radius) {
-        blackBall.vx = (blackBall.x - oldRedX) / 5;//除十是发现速度太快了，目前还没找到更好的方法。
-        blackBall.vy = (blackBall.y - oldRedY) / 5;
-    }
-
-    let bx = blueBall.x - blackBall.x
-    let by = blueBall.y - blackBall.y
-    let bdistance = Math.sqrt(bx * bx + by * by);
-    if (bdistance < blueBall.radius + blackBall.radius) {
-        blackBall.vx = (blackBall.x - oldBlueX) / 5;//除十是发现速度太快了，目前还没找到更好的方法。
-        blackBall.vy = (blackBall.x - oldBlueY) / 5;
-    }
+    redCheckCollision();
+    blueCheckCollision();
 }
 
 
@@ -357,19 +340,31 @@ dragBlueBall();
 
 (function drawFrame() {
     cxt.clearRect(0, 0, cnv.width, cnv.height);
-    oldBlueX = blueBall.x;
-    oldBlueY = blueBall.y;
-    oldRedX = redBall.x;
-    oldRedY = redBall.y;
     ballMove();
     blackBallBounce();
     //画出棋盘
     drawDesk();
     drawBall();
     score();
-    if (redWin == 3 || blueWin == 3) {
-        console.log('GAME OVER');
-        return;
+    if (redWin == 3) {
+        const musk = document.createElement('div');
+        musk.classList.add('musk');
+        musk.textContent = 'RED WIN'
+        musk.classList.add('red-musk')
+        document.body.appendChild(musk);
+        setTimeout(() => {
+            window.location.href = '../pages/index.html'
+        }, 3000);
+    }
+    if (blueWin == 3) {
+        const musk = document.createElement('div');
+        musk.classList.add('musk');
+        musk.textContent = 'BLUE WIN'
+        musk.classList.add('blue-musk')
+        document.body.appendChild(musk);
+        setTimeout(() => {
+            window.location.href = '../pages/index.html'
+        }, 3000);
     }
     window.requestAnimationFrame(drawFrame);
 })()

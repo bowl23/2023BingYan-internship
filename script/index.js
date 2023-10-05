@@ -24,7 +24,7 @@ pvpBtn.addEventListener('touchend', () => {
     people.classList.remove('touch')
     pvpBtn.classList.add('untouch')
     pvpBtn.classList.remove('touch-start')
-    window.location.href = 'play(canvas).html'
+    window.location.href = 'play with people(canvas).html'
 })
 pveBtn.addEventListener('touchstart', () => {
     bot.classList.add('touch')

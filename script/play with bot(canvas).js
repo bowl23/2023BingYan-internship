@@ -23,7 +23,23 @@ let blueIsDragging = false;
 let redWin = 0;
 let blueWin = 0;
 let final = false;
+let level = 0;
 
+// 获取难度
+const diff = localStorage.getItem('diff');
+
+function getDiff() {
+    if (diff == 'easy') {
+        level = 0.1;
+    }
+    else if (diff == 'normal') {
+        level = 0.2;
+    }
+    else if (diff == 'hard') {
+        level = 0.3
+    }
+    console.log(diff);
+}
 
 // 定义三个小球的参数
 
@@ -196,7 +212,7 @@ function blueCheckCollision() {
     let by = blueBall.y - blackBall.y
     let distance = Math.sqrt(bx * bx + by * by);
     if (distance < blueBall.radius + blackBall.radius) {
-        blackBall.vx = -bx / 5;//除十是发现速度太快了，目前还没找到更好的方法。
+        blackBall.vx = -bx / 5;
         blackBall.vy = -by / 5;
     }
 }
@@ -204,19 +220,24 @@ function blueCheckCollision() {
 
 // 小球移动
 function ballMove() {
+    // 黑球移动
     blackBall.x += blackBall.vx;
     blackBall.y += blackBall.vy;
-    blueBall.vx = blackBall.vx * 0.1;
+
+    // 蓝球移动
+    blueBall.vx = blackBall.vx * level;
     blueBall.x += blueBall.vx;
     blueBall.vy = 0;
-    if (blackBall.y >= cnv.height / 2 && blueBall.y == cnv.height / 4) {
-        blueBall.vy = 0;
-    }
-    else if (blackBall.y >= cnv.height / 2 && blueBall.y > cnv.height / 4) {
-        blueBall.vy = -3;
-    }
-    else if (blackBall.y >= cnv.height / 2 && blueBall.y < cnv.height / 4) {
-        blueBall.vy = 3;
+    if (blackBall.y >= cnv.height / 2) {
+        if (blueBall.y >= cnv.height / 4 - 3 && blueBall.y <= cnv.height / 4 + 3) {
+            blueBall.vy = 0
+        }
+        else if (blueBall.y < cnv.height / 4 - 3) {
+            blueBall.vy = 3;
+        }
+        else {
+            blueBall.vy = -3;
+        }
     }
     else if (blueBall.y + blueBall.radius < blackBall.y - blackBall.radius) {
         blueBall.vy = 2;
@@ -224,8 +245,8 @@ function ballMove() {
     else if (blueBall.y - blueBall.radius > blackBall.y - blackBall.radius) {
         blueBall.vy = -2;
     }
-    else if (blackBall.y >= blueBall.y - blueBall.radius && blackBall.y <= blueBall.y - blueBall.radius) {
-        blueBall.vy = -10;
+    else if (blackBall.y + blackBall.radius >= blueBall.y - blueBall.radius || blackBall.y - blackBall.radius <= blueBall.y - blueBall.radius) {
+        blueBall.vy = -(10 * level);
         blueBall.vx = 0;
     }
     blueBall.y += blueBall.vy;
@@ -292,44 +313,6 @@ function dragRedBall() {
 
 }
 
-// 蓝球的拖拽
-function dragBlueBall() {
-    cnv.addEventListener('touchstart', (e) => {
-        // 检测是否捕获到小蓝球
-        const touch = e.touches[0];
-        mouse2.x = touch.pageX - cnvRect.left;
-        mouse2.y = touch.pageY - cnvRect.top;
-
-
-        let dx = mouse2.x - blueBall.x
-        let dy = mouse2.y - blueBall.y
-        let dsitance = Math.sqrt(dx * dx + dy * dy);
-        if (dsitance < blueBall.radius) {
-            blueIsDragging = true;
-        }
-
-    })
-
-    cnv.addEventListener('touchmove', (e) => {
-
-        if (!blueIsDragging) {
-            return;
-        }
-        const touch = e.touches[0];
-        mouse2.x = touch.pageX - cnvRect.left;
-        mouse2.y = touch.pageY - cnvRect.top;
-        blueBall.x = mouse2.x;
-        blueBall.y = mouse2.y;
-        checkBlueBorder();
-        blueCheckCollision();
-    })
-
-    cnv.addEventListener('touchend', () => {
-        blueIsDragging = false;
-        return;
-    })
-
-}
 // 得分计数
 function score() {
     if (blackBall.x >= 130 && blackBall.x <= 270 && blackBall.y <= blackBall.radius + 10) {
@@ -358,6 +341,7 @@ function score() {
 }
 
 
+getDiff();
 // 拖拽
 dragRedBall();
 // dragBlueBall();
@@ -377,7 +361,9 @@ dragRedBall();
         musk.textContent = 'RED WIN'
         musk.classList.add('red-musk')
         document.body.appendChild(musk);
-        return;
+        setTimeout(() => {
+            window.location.href = '../pages/index.html'
+        }, 3000);
     }
     if (blueWin == 3) {
         const musk = document.createElement('div');
@@ -385,7 +371,9 @@ dragRedBall();
         musk.textContent = 'BLUE WIN'
         musk.classList.add('blue-musk')
         document.body.appendChild(musk);
-        return;
+        setTimeout(() => {
+            window.location.href = '../pages/index.html'
+        }, 3000);
     }
     window.requestAnimationFrame(drawFrame);
 })()
