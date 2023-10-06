@@ -56,7 +56,6 @@ a {
     width: 100%;
     justify-content: center;
     overflow: hidden;/
-    /* border: 1px solid black; */
 }
 
 .main .difficulty-text {
@@ -68,7 +67,6 @@ a {
     line-height: 4rem;
     height: 12rem;
     width: 100%;
-    /* border: 1px solid red; */
 }
 
 
