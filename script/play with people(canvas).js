@@ -346,6 +346,8 @@ dragBlueBall();
     drawDesk();
     drawBall();
     score();
+
+    // 胜利结算画面
     if (redWin == 3) {
         const musk = document.createElement('div');
         musk.classList.add('musk');
