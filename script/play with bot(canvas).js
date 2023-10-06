@@ -77,13 +77,6 @@ const mouse1 = {
     y: 0,
 }
 
-// 鼠标2
-const mouse2 = {
-    x: 0,
-    y: 0,
-}
-
-
 // 画棋盘
 function drawDesk() {
     cxt.beginPath();

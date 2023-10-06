@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'eng-font';
+    src: url('../confont/eng_font/sKVKrYi9Y9Cc.woff');
+}
+
+
+
 * {
     box-sizing: border-box;
 }
@@ -25,6 +32,7 @@ header {
 /* 主体框 */
 .main {
     color: black;
+    font-family: eng-font;
     font-weight: 1000;
     letter-spacing: 1px;
     text-shadow: 0.5px 0 0 black, 0 0.5px 0 black, -0.5px 0 0 black, 0 -0.5px 0 black;
@@ -80,11 +88,13 @@ header {
     margin-left: 20px;
     width: 70%;
     height: 50%;
+    font-weight: 600;
 }
 
 .btn-container .play-header {
     height: 50%;
     font-size: 5px;
+    font-family: eng-font;
     color: rgb(54, 205, 255);
     font-weight: 1000;
     margin-bottom: -1rem;

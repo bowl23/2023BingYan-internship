@@ -339,7 +339,7 @@ dragBlueBall();
 
 
 (function drawFrame() {
-    cxt.clearRect(0, 0, cnv.width, cnv.height);
+    cxt.clearRect(0, 0, cnv.width, cnv.height);//清空画布
     ballMove();
     blackBallBounce();
     //画出棋盘
